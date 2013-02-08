@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <settings>
-    <!--og�lne-->
+    <!--ogólne-->
     <category label="NFO">
         <setting label="30009" type="bool" id="TryAllURL" default="true"/>
     </category>
