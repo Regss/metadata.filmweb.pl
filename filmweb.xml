@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<scraper framework="1.0" date="2012-11-05">
+<scraper framework="1.0" date="2012-11-06">
     <NfoUrl dest="3">
         <RegExp conditional="!TryAllURL" input="$$1" output="&lt;url cache=&quot;filmweb-\1&quot;&gt;http://www.filmweb.pl/Film?id=\1&lt;/url&gt;" dest="3">
             <expression noclean="1">filmweb.pl/f([0-9]*)/</expression>
