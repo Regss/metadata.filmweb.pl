@@ -165,11 +165,20 @@
             </RegExp>
             
 			<!-- ACTORS !-->
-			<RegExp conditional="!EnableFullCast" input="$$1" output="\1" dest="6">
-				<expression noclean="1">class=&quot;pageBox filmCastBox&quot;&gt;(.*?)zobacz pełną</expression>
-			</RegExp>
-			<RegExp conditional="!EnableFullCast" input="$$6" output="&lt;actor&gt;&lt;name&gt;\3&lt;/name&gt;&lt;role&gt;\4&lt;/role&gt;&lt;thumb&gt;\11\2&lt;/thumb&gt;&lt;/actor&gt;" dest="5+">
-				<expression repeat="yes" fixchars="3,4">li&gt;.*?src=&quot;([^\.]+\.[^\.]+\.[^\.]+\.)2(\.[^&quot;]+)&quot;.*?v:starring&quot;&gt;([^&lt;]+)&lt;/a.*?roleName&gt;([^&lt;]+)&lt;/span.*?&lt;/li</expression>
+            <RegExp input="$$10" output="\1" dest="5+">
+                <RegExp conditional="!EnableFullCast" input="$$1" output="\1" dest="6">
+                    <expression noclean="1">class=&quot;pageBox filmCastBox&quot;&gt;(.*?)zobacz pełną</expression>
+                </RegExp>
+                <RegExp conditional="!EnableFullCast" input="$$6" output="&lt;actor&gt;&lt;name&gt;\3&lt;/name&gt;&lt;role&gt;\4&lt;/role&gt;&lt;thumb&gt;\11\2&lt;/thumb&gt;&lt;/actor&gt;" dest="10">
+                    <expression repeat="yes" fixchars="3,4">li&gt;.*?src=&quot;([^\.]+\.[^\.]+\.[^\.]+\.)2(\.[^&quot;]+)&quot;.*?v:starring&quot;&gt;([^&lt;]+)&lt;/a.*?roleName&gt;([^&lt;]+)&lt;/span.*?&lt;/li</expression>
+                </RegExp>
+                <RegExp input="$$1" output="\1" dest="6">
+                    <expression noclean="1">gatunek:([^:]+):</expression>
+                </RegExp>
+                <RegExp input="$$6" output="&lt;url function=&quot;Obsada&quot;&gt;http://www.filmweb.pl/film/xbmc-2009-$$9/cast&lt;/url&gt;" dest="10">
+					<expression>.+?Animacja.+</expression>
+				</RegExp>
+                <expression noclean="1" />
 			</RegExp>
 
             <!-- FANART !-->
@@ -233,14 +242,9 @@
 				<expression/>
 			</RegExp>
             
-            <!-- ACTORS - FUN. OBSADA z FILMWEB jeśli wybrano opcję pełnej obsady !-->
-            <RegExp conditional="EnableFullCast" input="$INFO[FullCastSite]" output="&lt;url function=&quot;Obsada&quot;&gt;http://www.filmweb.pl/film/xbmc-2009-$$9/cast&lt;/url&gt;" dest="5+">
-                <expression>FILMWEB</expression>
-			</RegExp>
-            
-            <!-- ACTORS - FUN. GetIMDBFullCastById z IMDB jeśli wybrano opcję pełnej obsady !-->
-            <RegExp conditional="EnableFullCast" input="$INFO[FullCastSite]" output="&lt;chain function=&quot;GetIMDBFullCastById&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
-                <expression>IMDB</expression>
+            <!-- ACTORS - FUN. GetTMDBFullCastById pełna obsada z TMDb jeśli wybrano opcję pełnej obsady !-->
+            <RegExp conditional="EnableFullCast" input="" output="&lt;chain function=&quot;GetTMDBCastByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
+                <expression />
 			</RegExp>
 
 			<!-- FANART - FUN. GetTMDBFanartByIdChain z TMDB jeśli wybrano opcję wszystkich fanartów !-->

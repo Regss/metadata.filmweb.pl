@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <strings>
     <string id="30000">All available cover</string>
-    <string id="30001">Full cast from IMDb</string>
+    <string id="30001">Full cast from TMDb</string>
     <string id="30002">Use IMDb rating</string>
     <string id="30003">Prefer DVD Plot</string>
     <string id="30008">Use original title</string>
     <string id="30009">Use NFOURL by filmweb.id only</string>
-    <string id="30010">Full cast from</string>
     <string id="30011">Take trailer</string>
     <string id="30012">Use fanart's from FILMWEB i TMDB</string>
     <string id="30013">Use Sets</string>
