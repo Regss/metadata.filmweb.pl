@@ -181,18 +181,13 @@
                 <expression noclean="1" />
             </RegExp>
 
-            <!-- FANART !-->
-            <RegExp conditional="!GetFanart" input="$$1" output="&lt;fanart&gt;&lt;thumb preview=&quot;\13\2&quot;&gt;\11\2&lt;/thumb&gt;&lt;/fanart&gt;" dest="5+">
-                <expression noclean="1">filmPhotos&quot;&gt;&lt;div class=col&gt;&lt;a href=&quot;([^\.]+\.[^\.]+\.[^\.]+\.)1([^"]+)&quot;</expression>
-            </RegExp>
-            
             <!-- IMDBID - Pobiera IMDBID za pomocą funkcji GoogleToIMDB !-->
             <RegExp input="$$1" output="\1" dest="7">
                 <expression noclean="1">title&gt;.[^&lt;]*\(([0-9]*)</expression>
             </RegExp>
-            <RegExp input="$$18" output="&lt;url function=&quot;GoogleToIMDB&quot;&gt;http://ajax.googleapis.com/ajax/services/search/web?v=1.0&amp;amp;q=\1+site:imdb.com&lt;/url&gt;" dest="5+">
+            <RegExp input="$$18" output="&lt;url function=&quot;GoogleToIMDB&quot;&gt;http://ajax.googleapis.com/ajax/services/search/web?v=1.0&amp;q=\1+site:imdb.com&amp;hl=pl&lt;/url&gt;" dest="5+">
                 <RegExp input="$$1" output="\1" dest="18">
-                    <expression fixchars="1">og:title&quot; content=&quot;([^&quot;]+)</expression>
+                    <expression fixchars="1">og:title&quot; content=&quot;?([^&quot;]+)&quot;?&gt;</expression>
                 </RegExp>
                 <RegExp input="$$19" output="\1" dest="18">
                     <RegExp input="$$18" output="\1" dest="19">
@@ -218,8 +213,8 @@
                 <expression/>
             </RegExp>
             
-            <!-- FANART - FUN. FANARTY z FILMWEB jeśli wybrano opcję wszystkich fanartów !-->
-            <RegExp conditional="GetFanart" input="$$9" output="&lt;url function=&quot;Fanarty&quot; cache=&quot;filmweb-$$9&quot;&gt;http://www.filmweb.pl/Film?id=$$9&lt;/url&gt;" dest="5+">
+            <!-- FANART - FUN. FANARTY jeden fanart z Filmweb dopisany na koniec !-->
+            <RegExp input="$$9" output="&lt;url function=&quot;Fanarty&quot; cache=&quot;filmweb-$$9&quot;&gt;http://www.filmweb.pl/Film?id=$$9&lt;/url&gt;" dest="5+">
                 <expression/>
             </RegExp>
             <expression noclean="1"/>
@@ -239,7 +234,7 @@
                 <expression>(.+)</expression>
             </RegExp>
             <RegExp input="$$6" output="&lt;id&gt;\1&lt;/id&gt;" dest="5">
-                <expression/>
+                <expression />
             </RegExp>
             
             <!-- ACTORS - FUN. GetTMDBFullCastById pełna obsada z TMDb jeśli wybrano opcję pełnej obsady !-->
@@ -247,8 +242,8 @@
                 <expression />
             </RegExp>
 
-            <!-- FANART - FUN. GetTMDBFanartByIdChain z TMDB jeśli wybrano opcję wszystkich fanartów !-->
-            <RegExp conditional="GetFanart" input="" output="&lt;chain function=&quot;GetTMDBFanartByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
+            <!-- FANART - FUN. GetTMDBFanartByIdChain fanarty z z TMDb !-->
+            <RegExp input="" output="&lt;chain function=&quot;GetTMDBFanartByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
                 <expression />
             </RegExp>
             
@@ -460,14 +455,8 @@
     
     <!-- Fanarty FUNCTION !-->
     <Fanarty dest="5">
-        <RegExp input="$$8" output="&lt;details&gt;&lt;fanart&gt;\1&lt;/fanart&gt;&lt;/details&gt;" dest="5">
-            <RegExp input="$$1" output="\1" dest="7">
-                <expression noclean="1">zdjęcia&lt;/a&gt;(.*?)&lt;script</expression>
-            </RegExp>
-            <RegExp input="$$7" output="&lt;thumb preview=&quot;\13\2&quot;&gt;\11\2&lt;/thumb&gt;" dest="8">
-                <expression noclean="1" repeat="yes">div class=col&gt;&lt;a href=&quot;([^\.]+\.[^\.]+\.[^\.]+\.)1([^"]+)&quot;</expression>
-            </RegExp>
-            <expression noclean="1"/>
+        <RegExp input="$$1" output="&lt;details&gt;&lt;fanart&gt;&lt;thumb preview=&quot;\13\2&quot;&gt;\11\2&lt;/thumb&gt;&lt;/fanart&gt;&lt;/details&gt;" dest="5">
+            <expression noclean="1" >filmPhotos&quot;&gt;&lt;div class=col&gt;&lt;a href=&quot;([^\.]+\.[^\.]+\.[^\.]+\.)1([^"]+)&quot;</expression>
         </RegExp>
     </Fanarty>
 </scraper>
