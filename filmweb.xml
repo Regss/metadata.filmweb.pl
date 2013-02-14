@@ -257,6 +257,16 @@
                 <expression />
             </RegExp>
 
+            <!-- MPAA - FUN. GetTMDBCertificationsByIdChain MPAA z TMDb !-->
+            <RegExp conditional="GetMPAA" input="" output="&lt;chain function=&quot;GetTMDBCertificationsByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
+                <expression />
+            </RegExp>
+
+            <!-- STUDIO - FUN. GetTMDBStudioByIdChain Studio z TMDb !-->
+            <RegExp conditional="GetStudio" input="" output="&lt;chain function=&quot;GetTMDBStudioByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
+                <expression />
+            </RegExp>
+
             <!-- IMDB Details - FUN. IMDB-Details jeśli wybrano pobieranie dodatkowych informacji z IMDB !-->
             <RegExp conditional="GetIMDBDetails" input="" output="&lt;url cache=&quot;$$6-combined.html&quot; function=&quot;IMDB-Details&quot;&gt;http://akas.imdb.com/title/$$6/combined&lt;/url&gt;" dest="5+">
                 <expression />
