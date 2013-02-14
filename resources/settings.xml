@@ -1,15 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <settings>
     <!--ogólne-->
     <category label="NFO">
+        <setting label="30008" type="bool" id="UseOriginalTitle" default="false"/>
+        <setting type="sep"/>
         <setting label="30009" type="bool" id="TryAllURL" default="true"/>
+        <setting id="language" default="pl" />
+        <setting id="tmdbplotlanguage" default="pl" />
     </category>
     <!--Filmweb-->
     <category label="Filmweb">
-        <setting label="30008" type="bool" id="UseOriginalTitle" default="false"/>
         <setting label="30000" type="bool" id="GetPoster" default="true"/>
-        <setting label="30003" type="bool" id="GetPlot" default="false"/>
         <setting label="30011" type="bool" id="GetTrailer" default="false"/>
+        <setting label="30003" type="bool" id="GetPlot" default="false"/>
+        <setting label="30004" type="bool" id="opis" default="true" enable="eq(-1,true)"/>
     </category>
     <!--TMDb!-->
     <category label="TMDb">
