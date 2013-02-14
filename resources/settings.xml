@@ -10,7 +10,6 @@
         <setting label="30000" type="bool" id="GetPoster" default="true"/>
         <setting label="30003" type="bool" id="GetPlot" default="false"/>
         <setting label="30011" type="bool" id="GetTrailer" default="false"/>
-        <setting label="30012" type="bool" id="GetFanart" default="false"/>
         <setting label="30013" type="bool" id="GetSets" default="false"/>
     </category>
     <!--Grafika-->
