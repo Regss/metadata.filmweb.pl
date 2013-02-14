@@ -18,6 +18,5 @@
         <setting label="30002" type="bool" id="GetIMDBRatings" default="false"/>
         <setting label="30001" type="bool" id="EnableFullCast" default="false"/>
         <setting label="30014" type="bool" id="GetIMDBDetails" default="false"/>
-        <setting label="30010" type="labelenum" values="IMDB|FILMWEB" id="FullCastSite" default="FILMWEB" enable="eq(-2,true)"/>
     </category>
 </settings>
