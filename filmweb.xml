@@ -214,8 +214,8 @@
                 <expression noclean="1" />
             </RegExp>
 
-            <!-- TRAILER - FUN. ZWIASTUNY jeśli wybrano opcję pobierania trailera !-->
-            <RegExp conditional="GetTrailer" input="$$9" output="&lt;url function=&quot;Zwiastuny&quot;&gt;http://www.filmweb.pl/film/xbmc-2009-$$9/video&lt;/url&gt;" dest="5+">
+            <!-- TRAILER - FUN. ZWIASTUNY !-->
+            <RegExp input="$$9" output="&lt;url function=&quot;Zwiastuny&quot;&gt;http://www.filmweb.pl/film/xbmc-2009-$$9/video&lt;/url&gt;" dest="5+">
                 <expression/>
             </RegExp>
 
@@ -276,7 +276,7 @@
             </RegExp>
 
             <!-- SETS - FUN. GetTMDBSetByIdChain jeśli wybrano opcję pobierania informacji o kolekcjach !-->
-            <RegExp conditional="GetSets" input="" output="&lt;chain function=&quot;GetTMDBSetByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
+            <RegExp input="" output="&lt;chain function=&quot;GetTMDBSetByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
                 <expression />
             </RegExp>
             
@@ -286,7 +286,7 @@
             </RegExp>
 
             <!-- MPAA - FUN. GetTMDBCertificationsByIdChain MPAA z TMDb !-->
-            <RegExp conditional="GetMPAA" input="" output="&lt;chain function=&quot;GetTMDBCertificationsByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
+            <RegExp input="" output="&lt;chain function=&quot;GetTMDBCertificationsByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
                 <expression />
             </RegExp>
 

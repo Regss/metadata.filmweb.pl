@@ -10,15 +10,11 @@
     </category>
     <!--Filmweb-->
     <category label="Filmweb">
-        <setting label="30011" type="bool" id="GetTrailer" default="false"/>
         <setting label="30003" type="bool" id="GetPlot" default="false"/>
         <setting label="30004" type="bool" id="opis" default="true" enable="eq(-1,true)"/>
     </category>
     <!--TMDb!-->
     <category label="TMDb">
-        <setting label="30013" type="bool" id="GetSets" default="false"/>
-        <setting label="30015" type="bool" id="GetMPAA" default="false"/>
-        <setting label="30016" type="bool" id="GetStudio" default="false"/>
         <setting label="30017" type="labelenum" values="us" id="tmdbcertcountry" default="us" visible="hide"/>
         <setting label="30001" type="bool" id="EnableFullCast" default="false"/>
     </category>
