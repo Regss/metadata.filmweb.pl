@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<scraper framework="1.0" date="2012-11-06">
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<scraper framework="1.0" date="2013-02-15">
     <NfoUrl dest="3">
         <RegExp conditional="!TryAllURL" input="$$1" output="&lt;url cache=&quot;filmweb-\1&quot;&gt;http://www.filmweb.pl/Film?id=\1&lt;/url&gt;" dest="3">
             <expression noclean="1">filmweb.pl/f([0-9]*)/</expression>
@@ -121,8 +121,11 @@
                 <RegExp input="" output="Ten film nie ma jeszcze zarysu fabuły. Możesz go dodać." dest="6">
                     <expression />
                 </RegExp>
-                <RegExp input="$$1" output="\1" dest="6">
-                    <expression clear="yes" fixchars="1">filmPlot&gt;&lt;p&gt;([^&lt;]+)</expression>
+                <RegExp input="$$8" output="\1" dest="6">
+                    <RegExp input="$$1" output="\1" dest="8">
+                        <expression clear="yes" fixchars="1">filmPlot&gt;&lt;p&gt;([^&lt;]+)</expression>
+                    </RegExp>
+                    <expression>(.+)</expression>
                 </RegExp>
                 <expression/>
             </RegExp>
@@ -158,12 +161,29 @@
             <RegExp input="$$6" output="&lt;director&gt;\1&lt;/director&gt;" dest="5+">
                 <expression repeat="yes" fixchars="1" trim="1">v:directedBy&quot;&gt;([^&lt;]+)&lt;</expression>
             </RegExp>
-
-            <!-- PLOT !-->
-            <RegExp conditional="!GetPlot" input="$$1" output="&lt;plot&gt;\1&lt;/plot&gt;" dest="5+">
-                <expression fixchars="1">v:summary&quot;&gt;(.*?)&lt;/</expression>
+       
+            <!-- PLOT - sprawdzenie czy jest plot na filmwebie!-->
+            <RegExp input="$$1" output="\1" dest="17">
+                <expression clear="yes" fixchars="1">v:summary&quot;&gt;(.*?)&lt;/</expression>
             </RegExp>
             
+            <!-- IMDBID - Pobiera IMDBID za pomocą funkcji GoogleToIMDB !-->
+            <RegExp input="$$1" output="\1" dest="7">
+                <expression noclean="1">title&gt;.[^&lt;]*\(([0-9]*)</expression>
+            </RegExp>
+            <RegExp input="$$18" output="&lt;url function=&quot;GoogleToIMDB&quot;&gt;http://ajax.googleapis.com/ajax/services/search/web?v=1.0&amp;q=\1+site:imdb.com&amp;hl=pl&lt;/url&gt;" dest="5+">
+                <RegExp input="$$1" output="\1" dest="18">
+                    <expression fixchars="1">og:title&quot; content=&quot;?([^&quot;]+)&quot;?&gt;</expression>
+                </RegExp>
+                <RegExp input="$$19" output="\1" dest="18">
+                    <RegExp input="$$18" output="\1" dest="19">
+                        <expression>[^\/]+\/(.+)</expression>
+                    </RegExp>
+                    <expression>(.+)</expression>
+                </RegExp>
+                <expression encode="1"/>
+            </RegExp>
+
             <!-- ACTORS !-->
             <RegExp input="$$10" output="\1" dest="5+">
                 <RegExp conditional="!EnableFullCast" input="$$1" output="\1" dest="6">
@@ -181,30 +201,8 @@
                 <expression noclean="1" />
             </RegExp>
 
-            <!-- IMDBID - Pobiera IMDBID za pomocą funkcji GoogleToIMDB !-->
-            <RegExp input="$$1" output="\1" dest="7">
-                <expression noclean="1">title&gt;.[^&lt;]*\(([0-9]*)</expression>
-            </RegExp>
-            <RegExp input="$$18" output="&lt;url function=&quot;GoogleToIMDB&quot;&gt;http://ajax.googleapis.com/ajax/services/search/web?v=1.0&amp;q=\1+site:imdb.com&amp;hl=pl&lt;/url&gt;" dest="5+">
-                <RegExp input="$$1" output="\1" dest="18">
-                    <expression fixchars="1">og:title&quot; content=&quot;?([^&quot;]+)&quot;?&gt;</expression>
-                </RegExp>
-                <RegExp input="$$19" output="\1" dest="18">
-                    <RegExp input="$$18" output="\1" dest="19">
-                        <expression>[^\/]+\/(.+)</expression>
-                    </RegExp>
-                    <expression>(.+)</expression>
-                </RegExp>
-                <expression encode="1"/>
-            </RegExp>
-            
             <!-- TRAILER - FUN. ZWIASTUNY jeśli wybrano opcję pobierania trailera !-->
             <RegExp conditional="GetTrailer" input="$$9" output="&lt;url function=&quot;Zwiastuny&quot;&gt;http://www.filmweb.pl/film/xbmc-2009-$$9/video&lt;/url&gt;" dest="5+">
-                <expression/>
-            </RegExp>
-
-            <!-- PLOT - FUN. OPISY jeśli wybrano opcję preferuj opis DVD !-->
-            <RegExp conditional="GetPlot" input="$$9" output="&lt;url function=&quot;Opisy&quot;&gt;http://www.filmweb.pl/film/xbmc-2009-$$9/descs&lt;/url&gt;" dest="5+">
                 <expression/>
             </RegExp>
 
@@ -236,7 +234,24 @@
             <RegExp input="$$6" output="&lt;id&gt;\1&lt;/id&gt;" dest="5">
                 <expression />
             </RegExp>
-            
+
+            <!-- PLOT - -->
+            <RegExp input="$$2" output="\1" dest="5+">
+                <!-- PLOT - Fallback do TMDb !-->
+                <RegExp input="$$17" output="&lt;chain function=&quot;GetTMDBLangPlotByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="2">
+                    <expression>^$</expression>
+                </RegExp>
+                <!-- PLOT - FUN. OPISY jeśli wybrano opcję preferuj opis DVD !-->
+                <RegExp conditional="GetPlot" input="$$17" output="&lt;url function=&quot;Opisy&quot;&gt;http://www.filmweb.pl/film/xbmc-2009-$$9/descs&lt;/url&gt;" dest="2">
+                    <expression>(.+)</expression>
+                </RegExp>
+                <!-- PLOT - opis podstawowy-->
+                <RegExp conditional="!GetPlot" input="$$17" output="&lt;plot&gt;\1&lt;/plot&gt;" dest="2">
+                    <expression>(.+)</expression>
+                </RegExp>
+                <expression noclean="1" />
+            </RegExp>
+
             <!-- ACTORS - FUN. GetTMDBFullCastById pełna obsada z TMDb jeśli wybrano opcję pełnej obsady !-->
             <RegExp conditional="EnableFullCast" input="" output="&lt;chain function=&quot;GetTMDBCastByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
                 <expression />
@@ -296,7 +311,7 @@
                 </RegExp>
                 <expression noclean="1">(.+)</expression>
             </RegExp>
-            <RegExp input="$$11" output="&lt;plot&gt;\1 [opis dystrybutora dvd]&lt;/plot&gt;" dest="8">
+            <RegExp conditional="opis" input="$$11" output="&lt;plot&gt;\1 [opis dystrybutora dvd]&lt;/plot&gt;" dest="8">
                 <RegExp input="$$1" output="\2" dest="11">
                     <expression fixchars="2">hoverOpacity&quot; id=([0-9]+)&gt;&lt;p[^&gt;]+&gt;(.*?)&lt;/p.*?Delete=\1.{2,300}\[opis dystrybutora dvd</expression>
                 </RegExp>
