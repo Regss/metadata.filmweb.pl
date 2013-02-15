@@ -166,7 +166,15 @@
             <RegExp input="$$6" output="&lt;director&gt;\1&lt;/director&gt;" dest="5+">
                 <expression repeat="yes" fixchars="1" trim="1">v:directedBy&quot;&gt;([^&lt;]+)&lt;</expression>
             </RegExp>
-       
+
+            <!-- STUDIO - sprawdzenie czy polska produkcja jeśli tak pobiera studio !-->
+            <RegExp input="$$16" output="\1" dest="5+">
+                <RegExp input="$$1" output="&lt;studio&gt;\1&lt;/studio&gt;" dest="16">
+                    <expression fixchars="1" clear="yes">&gt;Polska&lt;.*?dystrybucja:[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;([^&lt;]+)&lt;</expression>
+                </RegExp>
+                <expression noclean="1">(.+)</expression>
+            </RegExp>
+
             <!-- PLOT - sprawdzenie czy jest plot na filmwebie!-->
             <RegExp input="$$1" output="\1" dest="17">
                 <expression clear="yes" fixchars="1">v:summary&quot;&gt;(.*?)&lt;/</expression>
@@ -211,11 +219,6 @@
                 <expression/>
             </RegExp>
 
-            <!-- THUMB - FUN. PLAKATY jeśli wybrano opcję wszystkich okładek !-->
-            <RegExp conditional="GetPoster" input="$$9" output="&lt;url function=&quot;Plakaty&quot;&gt;http://www.filmweb.pl/film/xbmc-2009-$$9/posters&lt;/url&gt;" dest="5+">
-                <expression/>
-            </RegExp>
-            
             <!-- FANART - FUN. FANARTY jeden fanart z Filmweb dopisany na koniec !-->
             <RegExp input="$$9" output="&lt;url function=&quot;Fanarty&quot; cache=&quot;filmweb-$$9&quot;&gt;http://www.filmweb.pl/Film?id=$$9&lt;/url&gt;" dest="5+">
                 <expression/>
@@ -266,7 +269,12 @@
             <RegExp input="" output="&lt;chain function=&quot;GetTMDBFanartByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
                 <expression />
             </RegExp>
-            
+
+            <!-- THUMB - FUN. GetTMDBThumbsByIdChain jeśli wybrano opcję wszystkich okładek !-->
+            <RegExp input="" output="&lt;chain function=&quot;GetTMDBThumbsByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
+                <expression/>
+            </RegExp>
+
             <!-- SETS - FUN. GetTMDBSetByIdChain jeśli wybrano opcję pobierania informacji o kolekcjach !-->
             <RegExp conditional="GetSets" input="" output="&lt;chain function=&quot;GetTMDBSetByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
                 <expression />
@@ -283,8 +291,8 @@
             </RegExp>
 
             <!-- STUDIO - FUN. GetTMDBStudioByIdChain Studio z TMDb !-->
-            <RegExp conditional="GetStudio" input="" output="&lt;chain function=&quot;GetTMDBStudioByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
-                <expression />
+            <RegExp input="$$16" output="&lt;chain function=&quot;GetTMDBStudioByIdChain&quot;&gt;$$6&lt;/chain&gt;" dest="5+">
+                <expression>^$</expression>
             </RegExp>
 
             <!-- IMDB Details - FUN. IMDB-Details jeśli wybrano pobieranie dodatkowych informacji z IMDB !-->
@@ -331,16 +339,6 @@
             <expression noclean="1" />
         </RegExp>
     </Opisy>
-    
-    <!-- Plakaty FUNCTION !-->
-    <Plakaty dest="5">
-        <RegExp input="$$8" output="&lt;details&gt;\1&lt;/details&gt;" dest="5">
-            <RegExp input="$$1" output="&lt;thumb preview=&quot;\12\2&quot;&gt;\13\2&lt;/thumb&gt;" dest="8+">
-                <expression noclean="1" repeat="yes">li id=poster[^&gt;]+&gt;[^&gt;]+&gt; &lt;img src=&quot;([^\.]+\.[^\.]+\.[^\.]+\.).([^&quot;]+)&quot;</expression>
-            </RegExp>
-            <expression noclean="1"/>
-        </RegExp>
-    </Plakaty>
 
     <!-- Obsada FUNCTION !-->
     <Obsada dest="5">
