@@ -410,12 +410,6 @@
                 </RegExp>
                 <expression>(.+)</expression>
             </RegExp>
-            <RegExp input="$$14" output="&lt;plot&gt;\1&lt;/plot&gt;" dest="13">
-                <RegExp input="$$6" output="\1" dest="14">
-                    <expression fixchars="1" noclean="1">&lt;p class=text&gt;(.*?)&lt;/p</expression>
-                </RegExp>
-                <expression>(.+)</expression>
-            </RegExp>
             <expression noclean="1"/>
         </RegExp>
     </GetTrailerLink>
