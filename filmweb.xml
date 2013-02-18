@@ -126,16 +126,10 @@
 
             <!-- OUTLINE !-->
             <RegExp input="$$6" output="&lt;outline&gt;\1&lt;/outline&gt;" dest="5+">
-                <RegExp input="" output="Ten film nie ma jeszcze zarysu fabuły. Możesz go dodać." dest="6">
-                    <expression />
+                <RegExp input="$$1" output="\1" dest="6">
+                    <expression clear="yes" fixchars="1">filmPlot&gt;&lt;p&gt;([^&lt;]+)</expression>
                 </RegExp>
-                <RegExp input="$$8" output="\1" dest="6">
-                    <RegExp input="$$1" output="\1" dest="8">
-                        <expression clear="yes" fixchars="1">filmPlot&gt;&lt;p&gt;([^&lt;]+)</expression>
-                    </RegExp>
-                    <expression>(.+)</expression>
-                </RegExp>
-                <expression/>
+                <expression>(.+)</expression>
             </RegExp>
             
             <!-- GENRE !-->
