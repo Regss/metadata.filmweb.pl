@@ -6,7 +6,7 @@
         <setting type="sep"/>
         <setting label="30009" type="bool" id="TryAllURL" default="true"/>
         <setting id="language" default="pl" />
-        <setting id="tmdbplotlanguage" default="pl" />
+        <setting id="tmdbplotlanguage" default="pl"/>
     </category>
     <!--Filmweb-->
     <category label="Filmweb">
