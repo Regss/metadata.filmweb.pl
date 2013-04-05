@@ -137,16 +137,16 @@
             </RegExp>
 
             <!-- OUTLINE !-->
+            <RegExp input="$$1" output="\1" dest="6">
+                <expression clear="yes" fixchars="1">filmPlot&gt;&lt;p&gt;([^&lt;]+)</expression>
+            </RegExp>
             <RegExp input="$$6" output="&lt;outline&gt;\1&lt;/outline&gt;" dest="5+">
-                <RegExp input="$$1" output="\1" dest="6">
-                    <expression clear="yes" fixchars="1">filmPlot&gt;&lt;p&gt;([^&lt;]+)</expression>
-                </RegExp>
                 <expression>(.+)</expression>
             </RegExp>
             
             <!-- GENRE !-->
             <RegExp input="$$1" output="\1" dest="6">
-                <expression noclean="1">gatunek:(.*?)&lt;/ul</expression>
+                <expression clear="yes" noclean="1">gatunek:(.*?)&lt;/td</expression>
             </RegExp>
             <RegExp input="$$6" output="&lt;genre&gt;\1&lt;/genre&gt;" dest="5+">
                 <expression repeat="yes" fixchars="1" trim="1">a href=[^&gt;]+&gt;([^&lt;]+)&lt;</expression>
@@ -154,7 +154,7 @@
 
             <!-- COUNTRY !-->
             <RegExp input="$$1" output="\1" dest="6">
-                <expression noclean="1">produkcja:(.*?)&lt;/ul</expression>
+                <expression clear="yes" noclean="1">produkcja:(.*?)&lt;/ul</expression>
             </RegExp>
             <RegExp input="$$6" output="&lt;country&gt;\1&lt;/country&gt;" dest="5+">
                 <expression repeat="yes" fixchars="1" trim="1">a href=[^&gt;]+&gt;([^&lt;]+)&lt;</expression>
@@ -162,7 +162,7 @@
 
             <!-- CREDITS !-->
             <RegExp input="$$1" output="\1" dest="6">
-                <expression noclean="1">scenariusz:(.*?)&lt;/ul&gt;</expression>
+                <expression clear="yes" noclean="1">scenariusz:(.*?)&lt;/ul&gt;</expression>
             </RegExp>
             <RegExp input="$$6" output="&lt;credits&gt;\1&lt;/credits&gt;" dest="5+">
                 <expression repeat="yes" fixchars="1" trim="1">title=[^&gt;]+&gt;([^&lt;]+)&lt;</expression>
@@ -170,7 +170,7 @@
             
             <!-- DIRECTOR !-->
             <RegExp input="$$1" output="\1" dest="6">
-                <expression noclean="1">reżyseria:(.*?)&lt;/ul&gt;</expression>
+                <expression clear="yes" noclean="1">reżyseria:(.*?)&lt;/ul&gt;</expression>
             </RegExp>
             <RegExp input="$$6" output="&lt;director&gt;\1&lt;/director&gt;" dest="5+">
                 <expression repeat="yes" fixchars="1" trim="1">v:directedBy&quot;&gt;([^&lt;]+)&lt;</expression>
