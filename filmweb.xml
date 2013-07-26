@@ -47,7 +47,7 @@
     <GetSearchResults dest="8">
         <RegExp input="$$5" output="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; standalone=&quot;yes&quot;?&gt;&lt;results&gt;\1&lt;/results&gt;" dest="8">
             <RegExp input="$$1" output="&lt;entity&gt;&lt;title&gt;\1&lt;/title&gt;&lt;year&gt;&lt;/year&gt;&lt;url cache=&quot;filmweb-\2&quot;&gt;http://www.filmweb.pl/Film?id=\2&lt;/url&gt;&lt;/entity&gt;" dest="5">
-                <expression repeat="yes" fixchars="1">hitDescWrapper&gt;&lt;h3&gt;(.*?)&lt;/h3&gt;.*?([0-9]*)_FILM_([0-9]*)</expression>
+                <expression repeat="yes" fixchars="1">hitDescWrapper[^&lt;]+&lt;h3&gt;(.*?)&lt;/h3&gt;.*?([0-9]*)_FILM_([0-9]*)</expression>
             </RegExp>
             <RegExp input="$$5" output="\1 " dest="5">
                 <expression repeat="yes" noclean="1">([^\t]*)\t?</expression>
