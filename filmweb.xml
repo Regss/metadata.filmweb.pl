@@ -120,7 +120,7 @@
 
             <!-- TAGLINE !-->
             <RegExp input="$$1" output="&lt;tagline&gt;\1&lt;/tagline&gt;" dest="5+">
-                <expression fixchars="1">class=hdr-bigger&gt;[^&gt;]+&gt;([^&lt;]+)</expression>
+                <expression fixchars="1">h3 class="hdr[^&lt;]+(.*?)&lt;/h3&gt;</expression>
             </RegExp>
 
             <!-- TAG muzyka test !-->
