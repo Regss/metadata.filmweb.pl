@@ -50,7 +50,7 @@
                 <expression repeat="yes" fixchars="1">hitDescWrapper[^&lt;]+&lt;h3&gt;(.*?)&lt;/h3&gt;.*?([0-9]*)_FILM_([0-9]*)</expression>
             </RegExp>
             <RegExp input="$$5" output="\1 " dest="5">
-                <expression repeat="yes" noclean="1">([^\t]*)\t?</expression>
+                <expression repeat="yes" noclean="1">([^\n]*)\n?</expression>
             </RegExp>
             <expression noclean="1"/>
         </RegExp>
