@@ -315,14 +315,14 @@
                 <expression noclean="1" />
             </RegExp>
 
-            <!-- TRAILER - -->
+            <!-- TRAILER -->
             <RegExp input="$$2" output="\1" dest="5+">
                 <!-- TRAILER - Fallback do TMDb !-->
                 <RegExp input="$$15" output="&lt;chain function=&quot;GetTMDBTrailerByIdChain&quot;&gt;$$18&lt;/chain&gt;" dest="2">
                     <expression>^$</expression>
                 </RegExp>
-                <!-- TRAILER-->
-                <RegExp input="$$15" output="&lt;url function=&quot;GetTrailerLink&quot;&gt;http://www.filmweb.pl$$15&lt;/url&gt;" dest="2">
+                <!-- TRAILER - Filmweb -->
+                <RegExp input="$$15" output="&lt;url function=&quot;Trailer&quot;&gt;http://www.filmweb.pl$$15&lt;/url&gt;" dest="2">
                     <expression>(.+)</expression>
                 </RegExp>
                 <expression noclean="1" />
@@ -417,71 +417,25 @@
         </RegExp>
     </Obsada>
 
-    <!-- GetTrailerLink FUNCTION !-->
-    <GetTrailerLink dest="5">
-        <RegExp input="$$11$$13" output="&lt;details&gt;\1&lt;/details&gt;" dest="5">
-            <RegExp input="$$1" output="\1" dest="6">
-                <expression noclean="1">ięcej dla tego filmu(.*?)&lt;h2</expression>
+    <!-- Trailer FUNCTION !-->
+    <Trailer dest="5">
+        <RegExp input="$$4" output="&lt;details&gt;&lt;trailer&gt;\1&lt;/trailer&gt;&lt;/details&gt;" dest="5">
+            <RegExp input="$$1" output="\1" dest="4">
+                <expression noclean="1">source src=&quot;([^&quot;]+)&quot;</expression>
             </RegExp>
-            <RegExp input="$$6" output="&lt;url function=&quot;TryGetTrailer&quot;&gt;http://www.filmweb.pl/video/trailer/\1&lt;/url&gt;" dest="11">
-                <expression repeat="yes">&quot;/video/trailer/([^&quot;]+)&quot; t</expression>
+            <RegExp input="$$1" output="\1" dest="4">
+                <expression noclean="1">param name=movie value=&quot;([^&quot;]+)&quot;</expression>
             </RegExp>
-            <RegExp input="$$1" output="\1" dest="6">
-                <expression noclean="1">class=mainTrailerVideoBox(.*?)class=trailerFilmsRateBox</expression>
+            <RegExp input="$$1" output="\1" dest="4">
+                <expression noclean="1">param name=filename value=&quot;([^&quot;]+)&quot;</expression>
             </RegExp>
-            <RegExp input="$$12" output="&lt;trailer&gt;plugin://plugin.video.youtube/?action=play_video&amp;videoid=\1&lt;/trailer&gt;" dest="11">
-                <RegExp input="$$6" output="\1" dest="12">
-                    <expression clear="yes" noclean="1">youtube.com/v/(.{11})\??</expression>
-                </RegExp>
-                <expression>(.+)</expression>
-            </RegExp>
-            <RegExp input="$$12" output="&lt;trailer&gt;plugin://plugin.video.youtube/?action=play_video&amp;videoid=\1&lt;/trailer&gt;" dest="11">
-                <RegExp input="$$6" output="\1" dest="12">
-                    <expression clear="yes" noclean="1">youtube.com/watch\?v=(.{11})\??</expression>
-                </RegExp>
-                <expression>(.+)</expression>
-            </RegExp>
-            <RegExp input="$$12" output="&lt;trailer&gt;\1&lt;/trailer&gt;" dest="11">
-                <RegExp input="$$6" output="\1\2" dest="12">
-                    <expression clear="yes" noclean="1">src="([^"]+)(\.mp4|\.mpg|\.mov|\.ogv)</expression>
-                </RegExp>
-                <expression>(.+)</expression>
-            </RegExp>
-            <RegExp input="$$12" output="&lt;trailer&gt;\1&lt;/trailer&gt;" dest="11">
-                <RegExp input="$$6" output="\1" dest="12">
-                    <expression clear="yes" noclean="1">src:\["([^"]+)"\],width:1280,height:720</expression>
-                </RegExp>
-                <expression>(.+)</expression>
+            <RegExp input="$$1" output="plugin://plugin.video.youtube/?action=play_video&amp;videoid=\1" dest="4">
+                <expression noclean="1">&quot;http://www.youtube.com/v/([^&quot;]+)&quot;</expression>
             </RegExp>
             <expression noclean="1"/>
         </RegExp>
-    </GetTrailerLink>
+    </Trailer>
 
-    <!-- TryGetTrailer FUNCTION !-->
-    <TryGetTrailer dest="5">
-        <RegExp input="$$11" output="&lt;details&gt;\1&lt;/details&gt;" dest="5">
-            <RegExp input="$$12" output="&lt;trailer&gt;plugin://plugin.video.youtube/?action=play_video&amp;videoid=\1&lt;/trailer&gt;" dest="11">
-                <RegExp input="$$1" output="\1" dest="12">
-                    <expression clear="yes" noclean="1">youtube.com/v/(.{11})\??</expression>
-                </RegExp>
-                <expression>(.+)</expression>
-            </RegExp>
-            <RegExp input="$$12" output="&lt;trailer&gt;\1&lt;/trailer&gt;" dest="11">
-                <RegExp input="$$1" output="\1\2" dest="12">
-                    <expression clear="yes" noclean="1">src="([^"]+)(\.mp4|\.mpg|\.mov|\.ogv)</expression>
-                </RegExp>
-                <expression>(.+)</expression>
-            </RegExp>
-            <RegExp input="$$12" output="&lt;trailer&gt;\1&lt;/trailer&gt;" dest="11">
-                <RegExp input="$$1" output="\1" dest="12">
-                    <expression clear="yes" noclean="1">src:\["([^"]+)"\],width:1280,height:720</expression>
-                </RegExp>
-                <expression>(.+)</expression>
-            </RegExp>
-            <expression noclean="1"/>
-        </RegExp>
-    </TryGetTrailer>
-    
     <!-- Fanarty FUNCTION !-->
     <Fanarty dest="5">
         <RegExp input="$$1" output="&lt;details&gt;&lt;fanart&gt;&lt;thumb preview=&quot;\13\2&quot;&gt;\11\2&lt;/thumb&gt;&lt;/fanart&gt;&lt;/details&gt;" dest="5">
