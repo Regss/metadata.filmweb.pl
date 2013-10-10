@@ -1,4 +1,6 @@
-﻿[B]2.1.3[/B]
+﻿[B]2.1.4[/B]
+- ulepszenie: powiązanie filmweb.id z tmdb.id
+[B]2.1.3[/B]
 - powrót: wyszukiwarka web 
 [B]2.1.2[/B]
 - test: wyszukiwarka live
