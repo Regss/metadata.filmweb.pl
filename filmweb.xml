@@ -133,7 +133,7 @@
 
             <!-- THUMB !-->
             <RegExp input="$$1" output="&lt;thumb aspect=&quot;poster&quot; preview=&quot;\12\2&quot;&gt;\13\2&lt;/thumb&gt;" dest="5+">
-                <expression noclean="1">v:image&quot; href=&quot;([^\.]+\.[^\.]+\.[^\.]+\.).([^\?]+)\?</expression>
+                <expression noclean="1">v:image&quot; href=&quot;([^\.]+\.[^\.]+\.[^\.]+\.).(\.[a-z]+)</expression>
             </RegExp>
 
             <!-- OUTLINE !-->
