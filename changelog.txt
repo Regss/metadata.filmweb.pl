@@ -1,4 +1,6 @@
-﻿[B]2.1.6[/B]
+[B]2.1.7[/B]
+- poprawka: okładka
+[B]2.1.6[/B]
 - poprawka: pobieranie filmweb id
 [B]2.1.5[/B]
 - poprawka: pobieranie okładki
