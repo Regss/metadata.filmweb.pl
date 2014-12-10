@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <strings>
-    <string id="30001">Pełna obsada z TMDb</string>
-    <string id="30003">Pełny opis</string>
-    <string id="30004">Preferuj opis dla wydania DVD</string>
-    <string id="30008">Użyj tytułu oryginalnego</string>
-    <string id="30009">Sprawdź wszystkie linki z pliku NFO</string>
+    <string id="30000">Preferuj opis DVD</string>
+    <string id="30001">Pobieraj Trailer</string>
+    <string id="30002">Pobieraj pełną obsadę</string>
+    <string id="30003">Pobieraj Muzykę do tagu</string>
+    <string id="30004">Używaj oryginalnego tytułu</string>
+    <string id="30011">Przeszukaj wszystkie pliki NFO</string>
 </strings>
