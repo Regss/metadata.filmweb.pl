@@ -446,7 +446,7 @@
             <RegExp input="$$5" output="\1" dest="4">
                 <expression>source src=&quot;([^&quot;]+)&quot; type=.video/quicktime</expression>
             </RegExp>
-            <RegExp input="$$5" output="plugin://plugin.video.youtube/?action=play_video&videoid=\1" dest="4">
+            <RegExp input="$$5" output="plugin://plugin.video.youtube/?action=play_video&amp;videoid=\1" dest="4">
                 <expression>&quot;http://www.youtube.com/v/([^&quot;]+)&quot;</expression>
             </RegExp>
             <expression />
