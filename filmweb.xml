@@ -309,10 +309,10 @@
                 </RegExp>
                 <!-- FILMWEB PLOT !-->
                 <RegExp conditional="!GetDVDPlot" input="$$1" output="&lt;plot&gt;\1&lt;/plot&gt;" dest="6">
-                    <expression fixchars="1">filmMainDescription[^&lt;]+(&lt;p.*?&lt;/p&gt;)</expression>
+                    <expression fixchars="1">filmMainDescription[^&lt;]+&lt;p[^&gt;]+itemprop=&quot;description&quot;&gt;(.*?)((\.\.\. więcej&lt;/button&gt;&lt;/p&gt;)|(&lt;/p&gt;))</expression>
                 </RegExp>
                 <RegExp conditional="GetDVDPlot" input="$$1" output="&lt;url function=&quot;DVD_PLOT&quot;&gt;$$11/descs&lt;/url&gt;" dest="6">
-                    <expression fixchars="1">filmMainDescription[^&lt;]+(&lt;p.*?&lt;/p&gt;)</expression>
+                    <expression fixchars="1">filmMainDescription[^&lt;]+&lt;p[^&gt;]+itemprop=&quot;description&quot;&gt;(.*?)((\.\.\. więcej&lt;/button&gt;&lt;/p&gt;)|(&lt;/p&gt;))</expression>
                 </RegExp>
                 <expression noclean="1">(.+)</expression>
             </RegExp>
