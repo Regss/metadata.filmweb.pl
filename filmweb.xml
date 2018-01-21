@@ -38,6 +38,10 @@
                  -->
                 <expression repeat="yes">li id=&quot;hit_([0-9]+).*filmPreview__title&quot;&gt;([^&lt;]+).*filmPreview__year&quot;&gt;([0-9]+)&lt;.*filmPreview__originalTitle&quot;&gt;([^&lt;]+)</expression>
             </RegExp>
+            <!-- Drugie wyrażenie, potrzebne gdy nie ma oryginalnego tytułu -->
+            <RegExp input="$$1" output="&lt;entity&gt;&lt;title&gt;\2 / \2&lt;/title&gt;&lt;year&gt;\3&lt;/year&gt;&lt;url cache=&quot;filmweb-\1&quot;&gt;http://www.filmweb.pl/Film?id=\1&lt;/url&gt;&lt;/entity&gt;" dest="5+">
+                <expression repeat="yes">li id=&quot;hit_([0-9]+).*filmPreview__title&quot;&gt;([^&lt;]+).*filmPreview__year&quot;&gt;([0-9]+)&lt;</expression>
+            </RegExp>
             <expression noclean="1" />
         </RegExp>
     </GetSearchResults>
