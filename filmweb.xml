@@ -22,7 +22,7 @@
     
     <!-- Tworzy adres URL wyszukiwania !-->
     <CreateSearchUrl dest="3">
-        <RegExp input="$$1" output="&lt;url&gt;http://www.filmweb.pl/search/film?q=\1&amp;startYear=$$2&amp;endYear=$$2&lt;/url&gt;" dest="3">
+        <RegExp input="$$1" output="&lt;url&gt;http://www.filmweb.pl/films/search?q=\1&amp;startYear=$$2&amp;endYear=$$2&lt;/url&gt;" dest="3">
             <expression />
         </RegExp>
     </CreateSearchUrl>
@@ -30,8 +30,8 @@
     <!-- Tworzy adresy URL dla znalezionych pozycji !-->
     <GetSearchResults dest="8">
         <RegExp input="$$5" output="&lt;results sorted=&quot;yes&quot;&gt;\1&lt;/results&gt;" dest="8">
-            <RegExp input="$$1" output="&lt;entity&gt;&lt;title&gt;\2 / \4&lt;/title&gt;&lt;year&gt;\3&lt;/year&gt;&lt;url cache=&quot;filmweb-\1&quot;&gt;http://www.filmweb.pl/Film?id=\1&lt;/url&gt;&lt;/entity&gt;" dest="5">
-                <expression repeat="yes" fixchars="2,4" trim="2,4">li id=&quot;?film_([0-9]+)[^_]+&lt;h3&gt;([^_]+)&lt;/a&gt;[^_]+\(([0-9]+)\).*?title=&quot;?([^&quot;]+)&quot;.*?\1</expression>
+            <RegExp input="$$1" output="&lt;entity&gt;&lt;title&gt;\2 / \6&lt;/title&gt;&lt;year&gt;\3&lt;/year&gt;&lt;url cache=&quot;filmweb-\1&quot;&gt;http://www.filmweb.pl\4&lt;/url&gt;&lt;/entity&gt;" dest="5">
+                <expression repeat="yes" fixchars="2,6" trim="2,6">li id=&quot;hit_([0-9]+).*?data-title=&quot;([^&quot;]+).*?data-release="([0-9]+).*?class=&quot;filmPreview__link&quot; href=&quot;([^&quot;]+).*?(class=&quot;filmPreview__originalTitle&quot;&gt;([^&lt;]+)&lt;/div&gt;)?\s*&lt;div class=&quot;filmPreview__filmTime</expression>
             </RegExp>
             <expression noclean="1" />
         </RegExp>
@@ -51,6 +51,9 @@
                 </RegExp>
                 <RegExp input="$$1" output="\1" dest="20">
                     <expression>filmId:&quot;?([1-9][0-9]*)</expression>
+                </RegExp>
+                <RegExp input="$$1" output="\1" dest="20">
+                    <expression>data-filmid=&quot;([0-9]*)&quot;</expression>
                 </RegExp>
                 <expression />
             </RegExp>
@@ -205,7 +208,7 @@
                 <!-- FILMWEB GENRES !-->
                 <RegExp input="$$7" output="&lt;genre&gt;\1&lt;/genre&gt;" dest="6">
                     <RegExp input="$$1" output="\1" dest="7">
-                        <expression noclean="1" clear="yes">gatunek:(.*?)&lt;/ul</expression>
+                        <expression noclean="1" clear="yes">gatunek:(.*?)&lt;/ul&gt;</expression>
                     </RegExp>
                     <expression repeat="yes" fixchars="1">&gt;([^&lt;]+)&lt;/a</expression>
                 </RegExp>
@@ -214,9 +217,10 @@
             <!-- TAGLINE !-->
             <RegExp input="$$6" output="\1" dest="5+">
                 <!-- TMDB TAGLINE !-->
-                <RegExp input="$$18" output="&lt;chain function=&quot;GetTMDBTaglineByIdChain&quot;&gt;\1&lt;/chain&gt;" dest="6">
+<!-- skz: somehow triggers infinite loop -->
+<!--                <RegExp input="$$18" output="&lt;chain function=&quot;GetTMDBTaglineByIdChain&quot;&gt;\1&lt;/chain&gt;" dest="6">
                     <expression clear="yes">(.+)</expression>
-                </RegExp>
+                </RegExp>-->
                 <!-- FILMWEB TAGLINE !-->
                 <RegExp input="$$7" output="&lt;tagline&gt;\1&lt;/tagline&gt;" dest="6">
                     <RegExp input="$$1" output="\1" dest="7">
@@ -269,7 +273,7 @@
                 <RegExp input="$$1" output="\1" dest="6">
                     <expression noclean="1" clear="yes">muzyka:(.*?)&lt;/dd</expression>
                 </RegExp>
-                <expression fixchars="1" repeat="yes">&gt;([^&lt;]+[^\)])&lt;/a</expression>
+                <expression fixchars="1" repeat="yes">&gt;([^&lt;]+)&lt;/a</expression>
             </RegExp>
             
             <!-- COUNTRY !-->
