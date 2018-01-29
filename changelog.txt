@@ -1,3 +1,5 @@
+[B]2.3.6[/B]
+- Poprawka: adaptacja do zmian filmwebu - styczeń 2018 r.
 [B]2.3.5[/B]
 - Poprawka: pobieranie opisu
 [B]2.3.4[/B]

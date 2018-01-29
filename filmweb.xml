@@ -29,9 +29,15 @@
     
     <!-- Tworzy adresy URL dla znalezionych pozycji !-->
     <GetSearchResults dest="8">
-        <RegExp input="$$5" output="&lt;results sorted=&quot;yes&quot;&gt;\1&lt;/results&gt;" dest="8">
-            <RegExp input="$$1" output="&lt;entity&gt;&lt;title&gt;\2 / \4&lt;/title&gt;&lt;year&gt;\3&lt;/year&gt;&lt;url cache=&quot;filmweb-\1&quot;&gt;http://www.filmweb.pl/Film?id=\1&lt;/url&gt;&lt;/entity&gt;" dest="5">
-                <expression repeat="yes" fixchars="2,4" trim="2,4">li id=&quot;?film_([0-9]+)[^_]+&lt;h3&gt;([^_]+)&lt;/a&gt;[^_]+\(([0-9]+)\).*?title=&quot;?([^&quot;]+)&quot;.*?\1</expression>
+        <RegExp input="$$5" output="&lt;results sorted=&quot;yes&quot;&gt;\1&lt;/results&gt;" dest="8">                                                                                                             
+            <RegExp input="$$1" output="&lt;entity&gt;&lt;title&gt;\2&lt;/title&gt;&lt;year&gt;\3&lt;/year&gt;&lt;url cache=&quot;filmweb-\1&quot;&gt;http://www.filmweb.pl/Film?id=\1&lt;/url&gt;&lt;/entity&gt;" dest="5">
+                <!--Wyrażenie poniżej wyciąga dane z takiego obecnego rezultatu z filmwebu:
+                <li id="hit_30701" ...
+                <h3 class="filmPreview__title">Dwunastu gniewnych ludzi</h3><span class="filmPreview__year">1957</span>                                                    </a>
+                </div>
+                <div class="filmPreview__filmTime" data-duration="148">2 godz. 28 min.</div>
+                 -->
+                <expression repeat="yes">li id=&quot;hit_([0-9]+).*?filmPreview__title&quot;&gt;([^&lt;]+).*?filmPreview__year&quot;&gt;([^&lt;]+).*?(filmPreview__filmTime)?</expression>
             </RegExp>
             <expression noclean="1" />
         </RegExp>
