@@ -8,7 +8,7 @@
     $$15 - Year
     $$11 - URL
 !-->
-<scraper framework="1.1" date="2020-02-12">
+<scraper framework="1.1" date="2020-02-14">
     
     <!-- Check NFO files !-->
     <NfoUrl dest="3">
@@ -217,14 +217,8 @@
                     <expression clear="yes">(.+)</expression>
                 </RegExp>
                 <!-- FILMWEB TAGLINE !-->
-                <RegExp input="$$7" output="&lt;tagline&gt;\1&lt;/tagline&gt;" dest="6">
-                    <RegExp input="$$1" output="\1" dest="7">
-                        <expression fixchars="1" clear="yes">review__title[^&gt;]+&gt;[^&gt;]+&gt;([^&lt;]+)&lt;</expression>
-                    </RegExp>
-                    <RegExp input="$$1" output="\1" dest="7">
-                        <expression fixchars="1">h3 class=&quot;review__title[^&gt;]+&gt;[^&gt;]+&gt;([^&lt;]+)&lt;</expression>
-                    </RegExp>
-                    <expression>(.+)</expression>
+                <RegExp input="$$1" output="&lt;tagline&gt;\1&lt;/tagline&gt;" dest="6">
+                    <expression fixchars="1">reviewBox__title[^&gt;]+&gt;([^&lt;]+)&lt;</expression>
                 </RegExp>
                 <expression noclean="1">(.+)</expression>
             </RegExp>
