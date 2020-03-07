@@ -311,7 +311,7 @@
                     <expression noclean="1" clear="yes">filmCastSection(.*?)/section</expression>
                 </RegExp>
                 <RegExp conditional="!GetFullActors" input="$$7" output="&lt;actor&gt;&lt;thumb&gt;\1&lt;/thumb&gt;&lt;name&gt;\2&lt;/name&gt;&lt;role&gt;\3&lt;/role&gt;&lt;/actor&gt;" dest="6">
-                    <expression repeat="yes" trim="2,3" fixchars="2,3">data-src=&quot;([^&quot;]+)&quot;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;([^&lt;]+)&lt;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;\2[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;([^&lt;]+)&lt;</expression>
+                    <expression repeat="yes" trim="2,3" fixchars="2,3">data-src=&quot;([^&quot;]+)&quot;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;([^&lt;]+)&lt;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;\2[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;[^&gt;]+&gt;([^&lt;]+)&lt;</expression>
                 </RegExp>
                 <RegExp conditional="GetFullActors" input="$$1" output="&lt;url function=&quot;AKTORZY&quot;&gt;$$11/castAjax/actors&lt;/url&gt;" dest="6">
                     <expression noclean="1" clear="yes">.+</expression>
@@ -327,7 +327,7 @@
                 </RegExp>
                 <!-- FILMWEB THUMB !-->
                 <RegExp input="$$1" output="&lt;thumb aspect=&quot;poster&quot; preview=&quot;\12\2&quot;&gt;\13\2&lt;/thumb&gt;" dest="7">
-                    <expression clear="yes">filmPosterSection__link[^&gt;]+&gt;[^&gt;]+src=&quot;([^\.]+\.[^\.]+\.[^\.]+\.).([^&quot;]+)&quot;</expression>
+                    <expression clear="yes">filmPosterSection__link[^&gt;]+&gt;[^&gt;]+src=&quot;([^\.]+\.)[0-9]([^&quot;]+)&quot;</expression>
                 </RegExp>
                 <RegExp conditional="GetAlwaysTMDbThumb" input="$$7" output="\1" dest="6+">
                     <expression noclean="1">(.+)</expression>
